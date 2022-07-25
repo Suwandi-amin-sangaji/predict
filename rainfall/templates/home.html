@@ -1,0 +1,68 @@
+{% extends "snippets/layout.html" %}
+
+
+{% block content %}
+<div class="container-fluid">
+	<div class="row">
+	<!-- Nav -->
+	  <!-- <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+		<div class="position-sticky pt-3">
+		  <ul class="nav flex-column">
+			<li class="nav-item">
+			  <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">
+				<span data-feather="home"></span>
+				Dashboard
+			  </a>
+			</li>
+		  </ul>
+		</div>
+	  </nav> -->
+  
+	  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-5 container-fluid">
+		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		  <h1 class="h2 white-text">Peramalan Curah Hujan dengan LSTM</h1>
+		</div>
+
+		<div>
+			<div class="bd-example">
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						<div class="mt-3 mb-3 red-text">
+							<p>
+								{% for message in messages %}
+									{{ message }}
+								{% endfor %}
+							</p>
+						</div>
+					{% endif %}
+				{% endwith %}
+			<form method="POST">
+			  <div class="form-floating mb-3">
+				
+				{% if kemarin %}
+					<input name="kemarin" type="text" class="form-control" id="floatingInput" placeholder="data-sebelum" value="{{kemarin}}">
+				{% else %}
+					<input name="kemarin" type="text" class="form-control" id="floatingInput" placeholder="data-sebelum">
+				{% endif %}
+
+				<label for="floatingInput">Curah Hujan Kemarin</label>
+			  </div>
+			  <div class="form-floating mb-3">
+				
+				{% if hasil %}
+					<input name="prediksi" type="text" class="form-control" id="floatingPrediksi" readonly placeholder="prediksi" value="{{hasil}}">
+				{% else %}
+					<input name="prediksi" type="text" class="form-control" id="floatingPrediksi" placeholder="prediksi">
+				{% endif %}
+
+				<label for="floatingPrediksi">Prediksi</label>
+			  </div>
+			  <button type="submit" class="btn btn-primary">Mulai Prediksi</button>
+			</form>
+			</div>
+		  </div>
+	  </main>
+
+	</div>
+  </div>
+{% endblock content%}
